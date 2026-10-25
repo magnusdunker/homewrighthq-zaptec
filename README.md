@@ -1,30 +1,30 @@
-# Zaptec til HomewrightHQ
+# Zaptec for HomewrightHQ
 
-En ekstern integration til [HomewrightHQ](https://github.com/magnusdunker/homewrighthq) for Zaptec-ladebokse (Go, Go 2 og Pro) gennem Zaptecs cloud-API.
+An external integration for [HomewrightHQ](https://github.com/magnusdunker/homewrighthq) for Zaptec chargers (Go, Go 2 and Pro) through Zaptec's cloud API.
 
 ## Installation
 
-I HomewrightHQ: **Indstillinger → Integrationer → Fra GitHub**. Indsæt
+In HomewrightHQ: **Settings → Integrations → From GitHub**. Paste
 
 ```
 https://github.com/magnusdunker/homewrighthq-zaptec
 ```
 
-og tryk **Installér**. Tilføj derefter **Zaptec** under **Tilføj integration**, og log ind med den e-mail og adgangskode, du bruger på Zaptec-portalen eller i appen.
+and press **Install**. Then add **Zaptec** under **Add integration**, and log in with the email and password you use on the Zaptec portal or in the app.
 
-## Hvad du får
+## What you get
 
-Hver ladeboks bliver en enhed med:
+Each charger becomes a device with:
 
-- status: `disconnected`, `connected_requesting`, `charging`, `connected_finished` eller `unknown`
-- effekt i W, med strøm og spænding pr. fase og den tildelte ladestrøm som attributter
-- energi i den igangværende opladning (kWh)
-- energi i alt (kWh) fra boksens målerstand, hvor boksen sender en
-- online (forbindelse til Zaptec)
-- kontakten **Opladning**: tænd genoptager opladningen, sluk sætter den på pause
-- tallet **Dynamisk strømgrænse** i ampere, fra 0 til installationens maksimum
+- status: `disconnected`, `connected_requesting`, `charging`, `connected_finished` or `unknown`
+- power in W, with current and voltage per phase and the allocated charging current as attributes
+- energy in the ongoing charging session (kWh)
+- total energy (kWh) from the charger's meter reading, where the charger sends one
+- online (connection to Zaptec)
+- the switch **Opladning** (charging): on resumes charging, off pauses it
+- the number **Dynamisk strømgrænse** (dynamic current limit) in amperes, from 0 to the installation's maximum
 
-Integrationen registrerer også tjenesten `zaptec.set_charging_current` med feltet `current` (ampere). Den er til automationer, der lader i de billige timer: sæt f.eks. 16 A, når prisen er lav, og 0 A, når den er høj.
+The integration also registers the service `zaptec.set_charging_current` with the field `current` (amperes). It is for automations that charge in the cheap hours: for example, set 16 A when the price is low and 0 A when it is high.
 
 ```yaml
 action: zaptec.set_charging_current
@@ -34,60 +34,60 @@ data:
   current: 16
 ```
 
-Har kontoen kun én installation, kan `target` udelades.
+If the account has only one installation, `target` can be left out.
 
-## Strømgrænsen gælder hele installationen
+## The current limit applies to the whole installation
 
-Zaptec styrer strømmen pr. installation og ikke pr. ladeboks. Tallet og tjenesten sætter installationens tilgængelige strøm (`availableCurrent`), så alle ladebokse i samme installation får den samme grænse, og ændringen vises på dem alle. Værdien rundes til hele ampere og holdes mellem 0 og installationens `MaxCurrent` (32 A, hvis Zaptec ikke oplyser den).
+Zaptec controls the current per installation and not per charger. The number and the service set the installation's available current (`availableCurrent`), so all chargers in the same installation get the same limit, and the change shows on all of them. The value is rounded to whole amperes and kept between 0 and the installation's `MaxCurrent` (32 A if Zaptec does not report it).
 
-Zaptec anbefaler at ændre den tilgængelige strøm højst hvert 15. minut. Integrationen begrænser det ikke selv, så lad automationer skifte sjældent.
+Zaptec recommends changing the available current at most every 15 minutes. The integration does not limit this itself, so let automations change it rarely.
 
-## Opdatering og Zaptecs grænser
+## Updates and Zaptec's limits
 
-Integrationen læser hver ladeboks hvert minut, installationerne hvert tiende minut og listen over ladebokse en gang i timen, som Zaptec beder om. Under **Indstillinger** på integrationen kan tiden mellem opdateringer sættes fra 30 til 600 sekunder. Svarer Zaptec 429 (for mange forespørgsler), holder integrationen pause i mindst fem minutter, eller så længe Zaptec beder om.
+The integration reads each charger every minute, the installations every ten minutes and the list of chargers once an hour, as Zaptec asks. Under **Options** on the integration, the time between updates can be set from 30 to 600 seconds. If Zaptec answers 429 (too many requests), the integration pauses for at least five minutes, or as long as Zaptec asks.
 
-Efter et tryk på kontakten viser integrationen den forventede tilstand med det samme og venter 20 sekunder, før den læser boksen igen.
+After the switch is pressed, the integration shows the expected state right away and waits 20 seconds before it reads the charger again.
 
-## Ikke afprøvet
+## Not tested
 
-Integrationen er afprøvet mod en falsk Zaptec med svar formet som de rigtige, ikke mod rigtige ladebokse.
+The integration is tested against a fake Zaptec with responses shaped like the real ones, not against real chargers.
 
-Kontrolleret i Zaptecs dokumentation (docs.zaptec.com):
+Checked in Zaptec's documentation (docs.zaptec.com):
 
-- login med `POST /oauth/token`, `grant_type=password`, og svarfelterne `access_token` og `expires_in`
-- observationerne 710 (`ChargerOperationMode` 1, 2, 3, 5), 513 (effekt i W), 553 (energi i opladningen i kWh), 554 (`SignedMeterValue`), -2 (online), 501-503 (spænding), 507-509 (strøm) og 708 (tildelt strøm)
-- kommandoerne 506 (`StopChargingFinal`, pause) og 507 (`ResumeCharging`)
-- at installationslister højst bør hentes en gang i timen, og den tilgængelige strøm højst ændres hvert 15. minut
+- login with `POST /oauth/token`, `grant_type=password`, and the response fields `access_token` and `expires_in`
+- the observations 710 (`ChargerOperationMode` 1, 2, 3, 5), 513 (power in W), 553 (energy in the charging session in kWh), 554 (`SignedMeterValue`), -2 (online), 501-503 (voltage), 507-509 (current) and 708 (allocated current)
+- the commands 506 (`StopChargingFinal`, pause) and 507 (`ResumeCharging`)
+- that installation lists should be fetched at most once an hour, and the available current changed at most every 15 minutes
 
-Ikke kontrolleret mod den rigtige tjeneste:
+Not checked against the real service:
 
-- stien `POST /api/chargers/{id}/sendCommand/{kommando}` og at den tager imod et tomt body
-- `POST /api/installation/{id}/update` med `{ "availableCurrent": A }`, og at det sætter alle tre faser
-- felterne `MaxCurrent`, `AvailableCurrent` og `AvailableCurrentPhase1`-`3` i `GET /api/installation/{id}`
-- felterne i `GET /api/chargers` (`Data`, `Id`, `DeviceId`, `Name`, `InstallationId`, `IsOnline`), og at listen ikke er delt over flere sider for et almindeligt hjem
-- formatet af `GET /api/chargers/{id}/state` (`StateId`, `ValueAsString`)
-- at målerstanden i observation 554 er en OCMF-streng med aflæsningen i `RD[].RV` og enheden i `RU`; findes den ikke, vises sensoren for energi i alt ikke
-- at 400 fra `/oauth/token` betyder forkert adgangskode
-- hvordan en Go 2 og en Pro adskiller sig fra en Go i observationerne
+- the path `POST /api/chargers/{id}/sendCommand/{command}` and that it accepts an empty body
+- `POST /api/installation/{id}/update` with `{ "availableCurrent": A }`, and that it sets all three phases
+- the fields `MaxCurrent`, `AvailableCurrent` and `AvailableCurrentPhase1`-`3` in `GET /api/installation/{id}`
+- the fields in `GET /api/chargers` (`Data`, `Id`, `DeviceId`, `Name`, `InstallationId`, `IsOnline`), and that the list is not split over several pages for an ordinary home
+- the format of `GET /api/chargers/{id}/state` (`StateId`, `ValueAsString`)
+- that the meter reading in observation 554 is an OCMF string with the reading in `RD[].RV` and the unit in `RU`; if it is not there, the total energy sensor is not shown
+- that 400 from `/oauth/token` means a wrong password
+- how a Go 2 and a Pro differ from a Go in the observations
 
-Zaptecs Service Bus (live opdateringer uden at spørge) og 3-til-1-faseskift er ikke med.
+Zaptec's Service Bus (live updates without polling) and 3-to-1 phase switching are not included.
 
-## Udvikling
+## Development
 
-Bygget i Rust på SDK'en `thehome-plugin` fra [homewright-example-integration-rust](https://github.com/magnusdunker/homewrighthq-example-integration-rust).
+Built in Rust on the `thehome-plugin` SDK from [homewright-example-integration-rust](https://github.com/magnusdunker/homewrighthq-example-integration-rust).
 
-- `src/api.rs`: login og Zaptecs API
-- `src/model.rs`: Zaptecs data og hvordan de bliver til tilstande og kommandoer
-- `src/lib.rs`: forbindelsen til HomewrightHQ
-- `tests/zaptec.rs`: tests mod en falsk Zaptec med svarene i `tests/fixtures`, og en falsk HomewrightHQ i `tests/host`
+- `src/api.rs`: login and Zaptec's API
+- `src/model.rs`: Zaptec's data and how it becomes states and commands
+- `src/lib.rs`: the connection to HomewrightHQ
+- `tests/zaptec.rs`: tests against a fake Zaptec with the responses in `tests/fixtures`, and a fake HomewrightHQ in `tests/host`
 
 ```
 cargo test
 cargo build --release
 ```
 
-En ny version udgives med et tag, f.eks. `git tag v0.1.0 && git push origin v0.1.0`. Workflowet bygger til Windows, Linux (x86_64 og arm64, statisk musl) og macOS og lægger binærerne og `homewright.json` på releasen.
+A new version is released with a tag, e.g. `git tag v0.1.0 && git push origin v0.1.0`. The workflow builds for Windows, Linux (x86_64 and arm64, static musl) and macOS and puts the binaries and `homewright.json` on the release.
 
-## Licens
+## License
 
 MIT
