@@ -1,0 +1,33 @@
+{
+  "Pages": 1,
+  "Data": [
+    {
+      "OperatingMode": 3,
+      "IsOnline": true,
+      "Id": "c1a2b3c4-0000-4000-8000-000000000001",
+      "MID": "ZAP012345",
+      "DeviceId": "ZAP012345",
+      "SerialNo": "Carport",
+      "Name": "Carport",
+      "CreatedOnDate": "2024-05-01T10:00:00.000",
+      "CircuitId": "d1d1d1d1-0000-4000-8000-000000000010",
+      "Active": true,
+      "CurrentUserRoles": 3,
+      "Pin": "1234",
+      "DeviceType": 4,
+      "InstallationName": "Hjemme",
+      "InstallationId": "a1a1a1a1-0000-4000-8000-000000000100",
+      "AuthenticationType": 0,
+      "IsAuthorizationRequired": false
+    },
+    {
+      "OperatingMode": 1,
+      "IsOnline": false,
+      "Id": "c1a2b3c4-0000-4000-8000-000000000002",
+      "DeviceId": "ZAP067890",
+      "Name": "Indkørsel",
+      "InstallationId": "a1a1a1a1-0000-4000-8000-000000000100",
+      "DeviceType": 4
+    }
+  ]
+}

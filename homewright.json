@@ -1,0 +1,8 @@
+{
+  "domain": "zaptec",
+  "name": "Zaptec",
+  "plugin_api": 1,
+  "config_flow": true,
+  "iot_class": "cloud_polling",
+  "documentation": "https://github.com/magnusdunker/homewrighthq-zaptec"
+}

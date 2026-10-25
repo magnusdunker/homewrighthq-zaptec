@@ -1,0 +1,16 @@
+{
+  "Id": "a1a1a1a1-0000-4000-8000-000000000100",
+  "Name": "Hjemme",
+  "Address": "Vejen 1",
+  "ZipCode": "8000",
+  "City": "Aarhus C",
+  "CountryId": "dk",
+  "InstallationType": 0,
+  "MaxCurrent": 25.0,
+  "AvailableCurrentPhase1": 20.0,
+  "AvailableCurrentPhase2": 20.0,
+  "AvailableCurrentPhase3": 20.0,
+  "AvailableCurrentMode": 0,
+  "AuthenticationType": 0,
+  "Active": true
+}

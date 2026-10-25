@@ -1,0 +1,6 @@
+[
+  { "ChargerId": "c1a2b3c4-0000-4000-8000-000000000002", "StateId": -2, "Timestamp": "2026-10-25T09:00:00.000", "ValueAsString": "0" },
+  { "ChargerId": "c1a2b3c4-0000-4000-8000-000000000002", "StateId": 513, "Timestamp": "2026-10-25T09:00:00.000", "ValueAsString": "0" },
+  { "ChargerId": "c1a2b3c4-0000-4000-8000-000000000002", "StateId": 553, "Timestamp": "2026-10-25T09:00:00.000", "ValueAsString": "0" },
+  { "ChargerId": "c1a2b3c4-0000-4000-8000-000000000002", "StateId": 710, "Timestamp": "2026-10-25T09:00:00.000", "ValueAsString": "1" }
+]

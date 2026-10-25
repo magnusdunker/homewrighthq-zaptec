@@ -1,0 +1,15 @@
+[
+  { "ChargerId": "c1a2b3c4-0000-4000-8000-000000000001", "StateId": -2, "Timestamp": "2026-10-25T10:00:00.000", "ValueAsString": "1" },
+  { "ChargerId": "c1a2b3c4-0000-4000-8000-000000000001", "StateId": 501, "Timestamp": "2026-10-25T10:00:00.000", "ValueAsString": "231.2" },
+  { "ChargerId": "c1a2b3c4-0000-4000-8000-000000000001", "StateId": 502, "Timestamp": "2026-10-25T10:00:00.000", "ValueAsString": "230.8" },
+  { "ChargerId": "c1a2b3c4-0000-4000-8000-000000000001", "StateId": 503, "Timestamp": "2026-10-25T10:00:00.000", "ValueAsString": "232.0" },
+  { "ChargerId": "c1a2b3c4-0000-4000-8000-000000000001", "StateId": 507, "Timestamp": "2026-10-25T10:00:00.000", "ValueAsString": "15.9" },
+  { "ChargerId": "c1a2b3c4-0000-4000-8000-000000000001", "StateId": 508, "Timestamp": "2026-10-25T10:00:00.000", "ValueAsString": "15.8" },
+  { "ChargerId": "c1a2b3c4-0000-4000-8000-000000000001", "StateId": 509, "Timestamp": "2026-10-25T10:00:00.000", "ValueAsString": "15.9" },
+  { "ChargerId": "c1a2b3c4-0000-4000-8000-000000000001", "StateId": 513, "Timestamp": "2026-10-25T10:00:00.000", "ValueAsString": "11040.5" },
+  { "ChargerId": "c1a2b3c4-0000-4000-8000-000000000001", "StateId": 553, "Timestamp": "2026-10-25T10:00:00.000", "ValueAsString": "7.412" },
+  { "ChargerId": "c1a2b3c4-0000-4000-8000-000000000001", "StateId": 554, "Timestamp": "2026-10-25T10:00:00.000", "ValueAsString": "OCMF|{\"FV\":\"1.0\",\"GI\":\"ZAPTEC GO\",\"GS\":\"ZAP012345\",\"GV\":\"2.1.0.4\",\"PG\":\"F1\",\"RD\":[{\"TM\":\"2026-10-25T10:00:00,000+00:00 R\",\"RV\":2345.678,\"RI\":\"1-0:1.8.0\",\"RU\":\"kWh\",\"RT\":\"AC\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp384r1-SHA256\",\"SD\":\"3064023012\"}" },
+  { "ChargerId": "c1a2b3c4-0000-4000-8000-000000000001", "StateId": 708, "Timestamp": "2026-10-25T10:00:00.000", "ValueAsString": "16" },
+  { "ChargerId": "c1a2b3c4-0000-4000-8000-000000000001", "StateId": 710, "Timestamp": "2026-10-25T10:00:00.000", "ValueAsString": "3" },
+  { "ChargerId": "c1a2b3c4-0000-4000-8000-000000000001", "StateId": 911, "Timestamp": "2026-10-25T10:00:00.000", "ValueAsString": null }
+]
